@@ -102,7 +102,9 @@ add_action(
 			'menu',
 			array(
 				'methods'             => 'GET',
-				'callback'            => 'custom_wp_menu',
+				'callback'            => function() {
+					return wp_get_nav_menus();
+				},
 				'permission_callback' => '__return_true',
 			),
 		);
@@ -111,6 +113,8 @@ add_action(
 
 // create custom function to return nav menu
 function custom_wp_menu() {
-	return wp_get_nav_menu_items('MegaMenu');
+	// return wp_get_nav_menu_items('MegaMenu');
+	return wp_get_nav_menus();
+	// return get_nav_menu_locations();
 }
 

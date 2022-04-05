@@ -66,7 +66,14 @@ registerBlockType('cgb/block-megamenu', {
 					nav_menu: nav_menu
 				})
 			})
+		}
 
+		if (!props.attributes.nav_menu) {
+			return 'MegaMenu Loading...'
+		}
+
+		if (props.attributes.nav_menu && props.attributes.nav_menu.length === 0 ) {
+			return 'No Menu item found...'
 		}
 
 		console.log(props.attributes);
@@ -74,7 +81,15 @@ registerBlockType('cgb/block-megamenu', {
 
 		return (
 			<div className={props.className}>
-				<p>MegaMenu</p>
+				<select>
+					{
+						props.attributes.nav_menu.map(nav_item => {
+							return (
+								<option value={nav_item.term_id} key={nav_item.term_id}>{ nav_item.name }</option>
+							)
+						})
+					}
+				</select>
 			</div>
 		);
 	},
